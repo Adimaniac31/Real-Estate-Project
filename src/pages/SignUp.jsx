@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../components/Header'
 
 const SignOut = () => {
   return (
-    <div>SignOut</div>
+    <div>
+      <Header />
+    </div>
   )
 }
 
