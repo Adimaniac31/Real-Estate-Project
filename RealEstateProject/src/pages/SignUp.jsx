@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import signUpImg from "../assets/signUpImg.webp"
 import { Link,useNavigate } from 'react-router-dom'
+import OAuth from '../components/OAuth'
 const SignUp = () => {
   
   const [formData,setFormData] = useState({});
@@ -57,6 +58,7 @@ const SignUp = () => {
           <input placeholder='E-mail' type="email" id='email' onChange={handleChange}></input>
           <input placeholder='Password' type="password" id='password' onChange={handleChange}></input>
           <button disabled={loading} className='border-2 rounded-sm bg-orange-500 border-amber-600'>{loading ? 'loading...' : 'Sign Up'}</button>
+          <OAuth />
           <span>Have an account?
             <Link to='/sign-in' className='text-cyan-400'> Sign In</Link>.
           </span>

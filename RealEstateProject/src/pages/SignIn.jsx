@@ -4,6 +4,7 @@ import signUpImg from "../assets/signUpImg.webp";
 import { Link,useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 const SignIn = () => {
   
@@ -56,6 +57,7 @@ const SignIn = () => {
           <input placeholder='E-mail' type="email" id='email' onChange={handleChange}></input>
           <input placeholder='Password' type="password" id='password' onChange={handleChange}></input>
           <button disabled={loading} className='border-2 rounded-sm bg-orange-500 border-amber-600'>{loading ? 'loading...' : 'Sign In'}</button>
+          <OAuth />
           <span>Dont Have an account?
             <Link to='/sign-up' className='text-cyan-400'> Sign Up</Link>.
           </span>
