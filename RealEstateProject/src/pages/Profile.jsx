@@ -5,22 +5,27 @@ import { Link } from 'react-router-dom'
 import { useRef, useState, useEffect } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
+import { useDispatch } from 'react-redux'
+import {updateUserFailure,updateUserSuccess,updateUserStart} from "../redux/user/userSlice"
 
 const Profile = () => {
   const fileRef = useRef(null);
-  const { currentUser } = useSelector(state => state.user)
+  const { currentUser,loading,error } = useSelector(state => state.user)
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
-  console.log(formData);
-  console.log(filePerc);
-  console.log(fileUploadError);
+  const [updateSuccess,setUpdateSucess] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
     }
   }, [file]);
+
+  const handleChange=(e)=>{
+    setFormData({...formData,[e.target.id]:e.target.value});
+  }
 
   const handleFileUpload = (file) => {
     const storage = getStorage(app);
@@ -44,6 +49,31 @@ const Profile = () => {
           )
       });
   };
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try{
+      dispatch(updateUserStart());
+      const res = await fetch(`api/user/update/${currentUser._id}`,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if(data.success === false){
+        dispatch(updateUserFailure(data.message));
+        return;
+      }
+      dispatch(updateUserSuccess(data));
+      setUpdateSucess(true);
+    }
+    catch(error){
+      dispatch(updateUserFailure(error.message));
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -64,18 +94,24 @@ const Profile = () => {
           }
         </p>
         </div>
-        <form className='flex-col flex justify-center align-center text-center mx-24 gap-6 font-serif font-normal text-base md:w-64'>
+        <form className='flex-col flex justify-center align-center text-center mx-24 gap-6 font-serif font-normal text-base md:w-64' onSubmit={handleSubmit}>
           <h1 className='font-semibold text-4xl'>Profile</h1>
-          <input placeholder={currentUser.username} type="text" id='username'></input>
-          <input placeholder={currentUser.email} type="email" id='email'></input>
-          <input placeholder="password" type="password" id='password'></input>
-          <button className='border-2 rounded-sm bg-orange-500 border-amber-600'>Update</button>
+          <input placeholder="username" defaultValue={currentUser.username} type="text" id='username' onChange={handleChange}></input>
+          <input placeholder="email" defaultValue={currentUser.email} type="email" id='email' onChange={handleChange}></input>
+          <input placeholder="password" type="password" id='password' onChange={handleChange}></input>
+          <button className='border-2 rounded-sm bg-orange-500 border-amber-600'>{loading?'Loading':'Update'}</button>
           <button className=' border-2 rounded-sm border-amber-600 text-rose-600'>
             Delete Account!!
           </button>
           <span>
             Sign Out
           </span>
+          <p className='text-rose-500'>
+            {error ? error : ''}
+          </p>
+          <p className='text-green-500'>
+            {updateSuccess ? 'user is updated successfully' : ''}
+          </p>
         </form>
       </div>
     </div>
