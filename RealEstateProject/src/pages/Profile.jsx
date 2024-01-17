@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
 import { useDispatch } from 'react-redux'
-import {updateUserFailure,updateUserSuccess,updateUserStart} from "../redux/user/userSlice"
+import {updateUserFailure,updateUserSuccess,updateUserStart, deleteUserFailure, deleteUserStart, deleteUserSuccess} from "../redux/user/userSlice"
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -74,6 +74,23 @@ const Profile = () => {
     }
   }
 
+  const handleDeleteUser = async () => {
+    try{ 
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`,{
+        method:"DELETE",
+      });
+      const data = await res.json();
+      if(data.success === false){
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    }catch(error){
+      dispatch(deleteUserFailure(error.message));
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -100,7 +117,7 @@ const Profile = () => {
           <input placeholder="email" defaultValue={currentUser.email} type="email" id='email' onChange={handleChange}></input>
           <input placeholder="password" type="password" id='password' onChange={handleChange}></input>
           <button className='border-2 rounded-sm bg-orange-500 border-amber-600'>{loading?'Loading':'Update'}</button>
-          <button className=' border-2 rounded-sm border-amber-600 text-rose-600'>
+          <button className=' border-2 rounded-sm border-amber-600 text-rose-600' onClick={handleDeleteUser}>
             Delete Account!!
           </button>
           <span>
