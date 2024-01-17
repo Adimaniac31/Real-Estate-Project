@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
 import { useDispatch } from 'react-redux'
-import {updateUserFailure,updateUserSuccess,updateUserStart, deleteUserFailure, deleteUserStart, deleteUserSuccess} from "../redux/user/userSlice"
+import {updateUserFailure,updateUserSuccess,updateUserStart, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserStart, signOutUserSuccess} from "../redux/user/userSlice"
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -91,6 +91,21 @@ const Profile = () => {
     }
   }
 
+  const handleSignOut = async () =>{
+    try{
+      dispatch(signOutUserStart());
+      const res = await fetch(`/api/auth/signout`);
+      const data = await res.json();
+      if(data.success === false){
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+    }catch(error){
+      dispatch(signOutUserFailure(error.message));
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -120,7 +135,7 @@ const Profile = () => {
           <button className=' border-2 rounded-sm border-amber-600 text-rose-600' onClick={handleDeleteUser}>
             Delete Account!!
           </button>
-          <span>
+          <span onClick={handleSignOut} className='cursor-pointer'>
             Sign Out
           </span>
           <p className='text-rose-500'>
