@@ -131,7 +131,8 @@ const Profile = () => {
           <input placeholder="username" defaultValue={currentUser.username} type="text" id='username' onChange={handleChange}></input>
           <input placeholder="email" defaultValue={currentUser.email} type="email" id='email' onChange={handleChange}></input>
           <input placeholder="password" type="password" id='password' onChange={handleChange}></input>
-          <button className='border-2 rounded-sm bg-orange-500 border-amber-600'>{loading?'Loading':'Update'}</button>
+          <button className='border-2 rounded-sm bg-orange-400 border-amber-500'>{loading?'Loading':'Update'}</button>
+          <Link to="/create-listing" className='border-2 rounded-sm bg-orange-400 border-amber-500'>Create Listing</Link>
           <button className=' border-2 rounded-sm border-amber-600 text-rose-600' onClick={handleDeleteUser}>
             Delete Account!!
           </button>
