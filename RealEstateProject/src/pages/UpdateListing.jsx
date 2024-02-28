@@ -105,63 +105,12 @@ const UpdateListing = () => {
                 type: e.target.id
             });
         }
-
-        // if(e.target.id === 'parking'){
-        //     setFormData({
-        //         ...formData,
-        //         parking:true
-        //     });
-        // };
-
-        // if(e.target.id === 'furnished'){
-        //     setFormData({
-        //         ...formData,
-        //         furnished:true
-        //     });
-        // };
-
-        // if(e.target.id === 'offer'){
-        //     setFormData({
-        //         ...formData,
-        //         offer:true
-        //     });
-        // };
-
         else if(e.target.id === "parking" || e.target.id === "furnished" || e.target.id === "offer"){
             setFormData({
                 ...formData,
                 [e.target.id]: e.target.checked
             })
         }
-
-        // if(e.target.id === 'bedrooms'){
-        //     setFormData({
-        //         ...formData,
-        //         bedrooms:e.target.value
-        //     });
-        // };
-        //
-        // if(e.target.id === 'bathrooms'){
-        //     setFormData({
-        //         ...formData,
-        //         bathrooms:e.target.value
-        //     });
-        // };
-
-        // if(e.target.id === 'regularPrice'){
-        //     setFormData({
-        //         ...formData,
-        //         regularPrice:e.target.value
-        //     });
-        // };
-
-        // if(e.target.id === 'discountPrice'){
-        //     setFormData({
-        //         ...formData,
-        //         discountPrice:e.target.value
-        //     });
-        // };
-
         else{
             setFormData({
                 ...formData,
