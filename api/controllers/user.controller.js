@@ -43,7 +43,7 @@ export const deleteUser = async (req,res,next) => {
     }catch(error){
         next(error)
     }
-}
+};
 
 export const getUserListings = async (req,res,next) => {
     if(req.user.id === req.params.id){
@@ -55,5 +55,18 @@ export const getUserListings = async (req,res,next) => {
         }
     }else{
         return next(errorHandler(401,'You can only view your own listings!'));
+    }
+};
+
+export const getUser = async  (req,res,next)=>{
+    const user = await User.findById(req.params.id);
+    try{
+        if(!user){
+            return next(errorHandler,'User not found!!');
+        }
+        const { password : pass, ...rest} = user._doc;
+        res.status(200).json(rest);
+    }catch(error){
+        next(error);
     }
 }
