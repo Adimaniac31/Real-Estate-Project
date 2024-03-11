@@ -1,5 +1,4 @@
 import { React, useState } from 'react'
-import Header from '../components/Header'
 import { getStorage, getDownloadURL, uploadBytesResumable, ref } from 'firebase/storage';
 import { app } from "../firebase";
 import { useSelector } from 'react-redux';
@@ -187,7 +186,6 @@ const CreateListing = () => {
 
     return (
         <div>
-            <Header />
             <div className='flex flex-col justify-center items-center p-3 mx-auto'>
                 <h1 className='text-3xl font-semibold my-7 font-serif'>Create Listing</h1>
                 <div className='flex flex-col gap-4 ml-1'>

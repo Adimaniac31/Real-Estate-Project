@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from 'react';
-import Header from '../components/Header';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -50,7 +49,6 @@ const Listing = () => {
     }, [params.listingId]);
     return (
         <div>
-            <Header />
             {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
             {error && <p className='text-center my-7 text-2xl'>Something Went Wrong :/</p>}
             {listing && !loading && !error && (

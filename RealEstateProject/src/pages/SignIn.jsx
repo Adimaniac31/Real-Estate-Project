@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import signUpImg from "../assets/signUpImg.webp";
 import { Link,useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,7 +45,6 @@ const SignIn = () => {
 
   return ( 
     <div>
-      <Header />
       <div className='flex justify-center align-center w-full h-auto mt-24'>
         <div className='hidden md:flex'>
           <img src={signUpImg} className='border-25 rounded-lg'/>

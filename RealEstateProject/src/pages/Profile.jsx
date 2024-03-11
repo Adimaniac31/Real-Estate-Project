@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../components/Header'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useRef, useState, useEffect } from 'react'
@@ -139,7 +138,6 @@ const Profile = () => {
   }
   return (
     <div>
-      <Header />
       <div className='flex justify-center align-center w-full h-auto mt-24 md:flex-row flex-col'>
         <div className='flex justify-center align-center p-8 flex-col'>
           <input type='file' ref={fileRef} hidden accept='image/.*' onChange={(e) => setFile(e.target.files[0])}></input>
