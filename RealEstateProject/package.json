@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@reduxjs/toolkit": "^2.0.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "D": "^1.0.0",
     "firebase": "^10.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
