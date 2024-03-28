@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <div className='flex justify-between p-4 bg-amber-400'>
-      <h2 className='flex font-serif font-bold text-slate-700 text-sm sm:text-xl'>AdityaRealEstate</h2>
+      <Link to="/"><h2 className='flex font-serif font-bold text-slate-700 text-sm sm:text-xl'>AdityaRealEstate</h2></Link>
       <div>
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="Search" onChange={handleChange} value={searchTerm} className='border-2 rounded-md border-slate-200 w-32 md:w-auto' />
