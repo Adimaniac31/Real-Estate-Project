@@ -21,6 +21,7 @@
     "react-icons": "^5.0.1",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.0",
+    "realestate": "file:..",
     "redux-persist": "^6.0.0",
     "swiper": "^11.0.7"
   },
