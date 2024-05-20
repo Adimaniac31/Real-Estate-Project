@@ -57,6 +57,7 @@ const Profile = () => {
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -80,6 +81,7 @@ const Profile = () => {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
+        credentials: 'include'
       });
       const data = await res.json();
       if (data.success === false) {
@@ -125,6 +127,7 @@ const Profile = () => {
     try {
       const res = await fetch(`/api/listing/delete/${listingId}`, {
         method: 'DELETE',
+        credentials: 'include'
       });
       const data = await res.json();
       if (data.success === false) {

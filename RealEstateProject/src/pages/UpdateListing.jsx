@@ -127,6 +127,7 @@ const UpdateListing = () => {
             setError(false);
             const res = await fetch(`/api/listing/update/${params.listingId}`,{
                 method:'POST',
+                credentials: 'include',
                 headers : {
                     'Content-Type': 'application/json'
                 },

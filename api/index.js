@@ -6,6 +6,7 @@ import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cors from 'cors';
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(()=>{
@@ -17,6 +18,12 @@ mongoose.connect(process.env.MONGO).then(()=>{
     const __dirname = path.resolve();
 
 const app = express();
+
+app.use(cors({
+    origin: 'https://real-estate-project-8x2m.onrender.com/', // Replace with your frontend origin
+    // origin: 'http://localhost:5173',
+    credentials: true
+  }));
 
 app.use(express.json());
 app.use(cookieParser());
